@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+       
+      <link rel="stylesheet"  type="" href="../css/demo.css">
+        
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        
+         
+        <style>
+     
+
+            .resize-handler {
+                height: 10px;
+                width: 10px;
+                background-color: #0055ff;
+                position: absolute;
+                border-radius: 100px;
+                border: 1px solid #ffffff;
+                user-select: none;
+                display: none;
+            }
+            .resize-handler:hover {background-color: #0000cc;}
+            .resize-handler.rotate {cursor: url('https://findicons.com/files/icons/1620/crystal_project/16/rotate_ccw.png'), auto;}
+
+            :root {
+                /* id-1 */
+                --left-1: 200px;
+                --top-1: 480px;
+                --width-1: 200px;
+                --height-1: 200px;
+                --bg-1: #ffff00cc;
+                --zi-1: 1;
+
+                /* id-2 */
+                --left-2: 500px;
+                --top-2: 480px;
+                --width-2: 300px;
+                --height-2: 200px;
+                --bg:translate;
+                --zi-2: 2;
+            }
+            .fix{
+position: absolute;
+height: 90%;
+left: 5%;
+top: 5%;
+right: 5%;
+width: 90%;
+}
+.fix2{
+position: absolute;
+height: 90%;
+left: 5%;
+top: 5%;
+display: none;
+right: 5%;
+width: 90%;
+}
+#design{
+  position: absolute;
+height: 90%;
+left: 50%;
+top: 10%;
+background-color: #0000cc;
+right: 5%;
+width: 90%;
+}
+
+        </style>
+    </head>
+   
+     
+            
+      
+        <div class="box" data-id="1">
+        <img src="../image/01.png" class="fix"></div>
+        <div class="box" data-id="2" style="left: var(--left-2); top: var(--top-2); z-index: var(--zi-2); width: var(--width-2); height: var(--height-2); background-color: var(--bg-2);">
+        <img src="../image/12.jpg" class="fix2"></div>
+        <div id="design"></div>
+    </body>
+    <script src="box-modeling.js"></script>
+    <script>
+        $('.box').boxModeling({
+            rotate: true,
+            resize: true,
+            move: true,
+        });
+    </script>
+   
+ 
+   <script>
+    const togglrbtn9 = document.querySelector('#design');
+const divlist18 = document.querySelector('.fix2');
+ 
+
+togglrbtn9 .addEventListener('click',() =>{
+if(divlist18.style.display === 'block'){
+divlist18.style.display = 'none';
+}
+else{ divlist18.style.display = 'block';}
+ 
+});
+</script>    
+
+
+</html>
+
+
+
+/* id-3 */
+--left-3: 70%;
+--top-3: 10%;
+--width-3: 13%;
+--height-3: 25%;
+--zi-3: 3;
+
+
+/* id-4 */
+--left-4: 70%;
+--top-4: 480px;
+--width-4: 13%;
+--height-4: 25%;
+--zi-4: 4;
+
+
+/* id-5 */
+--left-5: 70%;
+--top-5: 480px;
+--width-5: 13%;
+--height-5: 25%;
+--zi-5: 5;
+
+
+ 
+
+
+/* id-7 */
+--left-7: 70%;
+--top-7: 480px;
+--width-7: 13%;
+--height-7: 25%;
+--zi-7: 7;
+
+
+/* id-8 */
+--left-8: 70%;
+--top-8: 480px;
+--width-8: 13%;
+--height-8: 25%;
+--zi-8: 8;

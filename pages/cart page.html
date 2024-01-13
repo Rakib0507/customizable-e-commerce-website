@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cart</title>
+  <style>
+    body {
+      background-color: #222;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+
+    .screenshot-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .screenshot {
+      width: 300px;
+      padding: 10px;
+      background-color: #333;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      transition: transform 0.3s ease;
+      transform-style: preserve-3d;
+    }
+
+    .screenshot:hover {
+      transform: translateY(-5px) rotateX(10deg);
+    }
+
+    .screenshot img {
+      width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    .screenshot .remove-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 20px;
+      color: #888;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .screenshot .remove-button:hover {
+      color: #f00;
+    }
+
+    .screenshot select,
+    .screenshot button,
+    .screenshot input {
+      margin-bottom: 10px;
+    }
+
+    .screenshot select {
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #fff;
+      color: #333;
+    }
+
+    .screenshot button {
+      padding: 8px 12px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .screenshot .price {
+      position: absolute;
+      bottom: 10px;
+      font-family: 'Times New Roman', Times, serif;
+      right: 10px;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .screenshot .size {
+      position: absolute;
+      bottom: 30px;
+      font-family: 'Times New Roman', Times, serif;
+      right: 10px;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .screenshot .product-id {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      font-family: 'Times New Roman', Times, serif;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 300px;
+      position: relative;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      transform: translateZ(0);
+      animation: modal-fade 0.3s ease;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .modal-title {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .modal-body {
+      margin-bottom: 15px;
+    }
+
+    .modal-input {
+      margin-bottom: 10px;
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: center;
+    }
+
+    .modal-button {
+      padding: 8px 12px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* Modal Animation */
+    @keyframes modal-fade {
+      from {
+        opacity: 0;
+        transform: translate3d(0, -30px, 0);
+      }
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -100px;
+      height: 100vh;
+      width: 60px;
+      background: rgba(255,255,255,0.05);
+	box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+      color: #fff;
+      padding: 20px;
+      transition: left 0.3s ease-in-out;
+    }
+    
+    .sidebar ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .sidebar ul li {
+      margin-bottom: 10px;
+      
+    }
+    
+    .a1 {
+      top: 30%;
+      position: absolute;
+      color: #fff;
+      margin-top:30px ;
+      text-decoration: none;
+    }
+    
+    .a2 {
+      top: 50%;
+      left: 26%;
+      position: absolute;
+      color: #fff;
+      margin-top:30px ;
+      text-decoration: none;
+    }
+    .a3 {
+      top: 40%;
+      left: 15%;
+      position: absolute;
+      color: #fff;
+      text-decoration: none;
+      margin-top:30px ;
+    }
+    .a4 {
+      top: 45%;
+      left: 15%;
+      position: absolute;
+      color: #fff;
+      margin-top:30px ;
+      text-decoration: none;
+    }
+    .a5 {
+      top: 35%;
+      left: 15%;
+      position: absolute;
+      color: #fff;
+      text-decoration: none;
+      margin-top:30px ;
+    }
+    
+    .sidebar-toggle {
+      position: fixed;
+      top: 20px;
+      left: 5px;
+      cursor: pointer;
+      z-index: 999;
+    }
+    
+    .sidebar-toggle span {
+      display: block;
+      width: 30px;
+      height: 5px;
+      background-color: #fff;
+      margin-bottom: 5px;
+    }
+
+  </style>
+</head>
+<body>
+
+  
+
+<div id="screenshotContainer" class="screenshot-container">
+  <!-- Your screenshot containers will be dynamically added here -->
+</div>
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title">Please Provide Your Information</div>
+    </div>
+    <div class="modal-body">
+      <input type="email" id="emailField" class="modal-input" placeholder="Email" required>
+      <input type="tel" id="mobileNumberField" class="modal-input" placeholder="Mobile Number" required>
+      <input type="text" id="addressField" class="modal-input" placeholder="Address" required>
+    </div>
+    <div class="modal-footer">
+      <button id="submitBtn" class="modal-button">Submit</button>
+    </div>
+  </div>
+</div>
+
+<div class="sidebar-toggle" onclick="toggleSidebar()">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+<div class="sidebar" id="sidebar">
+  <ul>
+    <li><a href="../demo project.html" class="a1">Home</a></li>
+    <li><a href="../pages/cart page.html"class="a2">Cart</a></li>
+    <li><a href="../pages/massage.html"class="a3">Contact</a></li>
+    <li><a href="../pages/about-us.html"class="a4">About Us</a></li>
+    <li><a href="../pages/page 2.html"class="a5">Product</a></li>
+  </ul>
+</div>
+
+ 
+<script>
+  function toggleSidebar() {
+    var sidebar = document.getElementById("sidebar");
+    var content = document.querySelector(".content");
+    
+    if (sidebar.style.left === "-220px") {
+      sidebar.style.left = "0";
+      content.style.marginLeft = "220px";
+    } else {
+      sidebar.style.left = "-220px";
+      content.style.marginLeft = "0";
+    }
+  }
+</script>
+
+
+
+<script>
+  function deleteScreenshot(screenshotKey) {
+    localStorage.removeItem(screenshotKey);
+    displayScreenshots();
+  }
+
+  function buyScreenshot(size, price, screenshotData, screenshotCounter, productId) {
+    var modal = document.getElementById("modal");
+    modal.style.display = "block";
+
+    var submitBtn = document.getElementById("submitBtn");
+    submitBtn.addEventListener("click", submitClicked);
+
+    function submitClicked() {
+      var email = document.getElementById("emailField").value;
+      var mobileNumber = document.getElementById("mobileNumberField").value;
+      var address = document.getElementById("addressField").value;
+
+      if (email.trim() === "" || mobileNumber.trim() === "" || address.trim() === "") {
+        alert("Please fill in all the required fields");
+        return;
+      }
+
+      localStorage.setItem("email", email);
+      localStorage.setItem("mobileNumber", mobileNumber);
+      localStorage.setItem("address", address);
+
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "store_message.php", true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var response = xhr.responseText;
+          alert(response); // Show the response from the server
+          modal.style.display = "none";
+          submitBtn.removeEventListener("click", submitClicked);
+        }
+      };
+
+      var params =
+        "size=" +
+        encodeURIComponent(size) +
+        "&price=" +
+        encodeURIComponent(price) +
+        "&screenshotData=" +
+        encodeURIComponent(screenshotData) +
+        "&screenshotCounter=" +
+        screenshotCounter +
+        "&productId=" +
+        productId +
+        "&email=" +
+        encodeURIComponent(email) +
+        "&mobileNumber=" +
+        encodeURIComponent(mobileNumber) +
+        "&address=" +
+        encodeURIComponent(address);
+      xhr.send(params);
+    }
+  }
+
+  function displayScreenshots() {
+    var screenshotData;
+    var img;
+
+    var container = document.getElementById("screenshotContainer");
+    container.innerHTML = ""; // Clear previous screenshots
+
+    // Define an array of prices for each product
+    var prices = [
+      null, // Index 0 is not used, so set it to null
+      600,  // Price for product ID 1
+      400,  // Price for product ID 2
+      1000, // Price for product ID 3
+      1200, // Price for product ID 4
+      1400, // Price for product ID 5
+      1600, // Price for product ID 6
+      500, // Price for product ID 7
+      800  // Price for product ID 8
+    ];
+
+    for (var i = 1; i <= 8; i++) {
+      var screenshotCounter = 1;
+      while ((screenshotData = localStorage.getItem(
+        "screenshotData" + i + "_" + screenshotCounter
+      ))) {
+        (function() {
+          var currentCounter = screenshotCounter; // Capture the counter value
+          var currentProductId = i; // Capture the product id value
+
+          img = document.createElement("img");
+          img.src = screenshotData;
+
+          var sizeSelect = createSizeSelect();
+
+          var buyButton = document.createElement("button");
+          buyButton.innerText = "Buy Now";
+          buyButton.addEventListener("click", function() {
+            var selectedSize = sizeSelect.value;
+            var selectedPrice = this.parentNode.querySelector(".price").textContent;
+            var productId = this.parentNode.querySelector(".product-id").textContent;
+            buyScreenshot(selectedSize, selectedPrice, screenshotData, currentCounter, currentProductId);
+          });
+
+          var removeButton = document.createElement("button");
+          removeButton.innerHTML = "&#10060;";
+          removeButton.classList.add("remove-button");
+          removeButton.addEventListener("click", function() {
+            var screenshotWrapper = this.parentNode.parentNode;
+            screenshotWrapper.removeChild(this.parentNode);
+            deleteScreenshot("screenshotData" + currentProductId + "_" + currentCounter); // Use the captured counter and product ID value
+          });
+
+          var screenshotWrapper = document.createElement("div");
+          screenshotWrapper.classList.add("screenshot");
+          screenshotWrapper.appendChild(img);
+          screenshotWrapper.innerHTML += '<div class="price">Price: ' + prices[currentProductId] + 'tk</div>'; // Use the corresponding price from the array
+          screenshotWrapper.innerHTML += '<div class="product-id"> ID: ' + currentProductId + '</div>';
+          screenshotWrapper.appendChild(sizeSelect);
+          screenshotWrapper.appendChild(buyButton);
+          screenshotWrapper.appendChild(removeButton);
+          container.appendChild(screenshotWrapper);
+        })();
+
+        screenshotCounter++;
+      }
+    }
+  }
+
+  function createSizeSelect() {
+    var sizeSelect = document.createElement("select");
+    sizeSelect.innerHTML = `
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+        <option value="XXL">XXL</option>
+        <option value="XXXL">XXXL</option>
+      `;
+
+    return sizeSelect;
+  }
+
+  function fillFormFields() {
+    var email = localStorage.getItem("email");
+    var mobileNumber = localStorage.getItem("mobileNumber");
+    var address = localStorage.getItem("address");
+
+    if (email) {
+      document.getElementById("emailField").value = email;
+    }
+    if (mobileNumber) {
+      document.getElementById("mobileNumberField").value = mobileNumber;
+    }
+    if (address) {
+      document.getElementById("addressField").value = address;
+    }
+  }
+
+  displayScreenshots();
+  fillFormFields();
+</script>
+</body>
+</html>

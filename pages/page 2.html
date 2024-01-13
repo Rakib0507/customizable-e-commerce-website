@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet"  type="" href="../css/demo.css">
+ 
+</head>
+<body>
+
+  <div class="open1">
+    <div class="A1">BLACK BRAIN</div>
+ </div>
+  <img src="../image/pngom.png" class="blu1"> 
+  <svg>
+    <filter id="wavy">
+      <feTurbulence x="0" y="0" id="turbulence" baseFrequency="0.01" numOctaves="5" seed="2">
+        <animate attributeName="baseFrequency" dur="60s" values="0.01;0.05;0.01" repeatCount="indefinite" />
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" scale="20" />
+    </filter>
+  </svg>
+  <div class="sk1"></div>
+  
+       
+     
+  <div class="r1"></div> 
+  <button class="card1" > <img src="../image/product03.png" class="p2"> <a class="p2" href= "../pages/page-2 cap.html"></a>
+  <div class="t1">Pigment-Dyed||Cap  </div> <div class="k1">400tk</div></button> 
+  <button class="card2"><img src="../image/product2.webp" class="p3"> <a class="p3" href= "../pages/2nd card.html"></a>
+    <div class="t2">Canvas 3001||T-Shirt  </div> <div class="k2">600tk</div></button> </button>
+  <button class="card3"><img src="../image/phone 4.webp" class="p4"> <a class="p4" href= "../pages/3rd card.html"></a>
+    <div class="t3">Polycarbonate outer shell</div>  <div class="tt3">Tough Case for||iPhone</div> <div class="k3">1000tk</div></button></button>
+  <button class="card4"><img src="../image/product 6.webp" class="p5"> <a class="p5" href= "../pages/4th card.html"></a>
+    <div class="t4">Eco Tote||Bag  </div> <div class="k4">1200tk</div></button> </button>
+  <button class="card5"><img src="../image/product 7.webp" class="p6"> <a class="p6" href= "../pages/5th card.html"> </a>
+    <div class="t5">Heavy Blend Hoodie </div> <div class="k5">1400tk</div> </button> 
+  <button class="card6"><img src="../image/product 10.webp" class="p7"> <a class="p7" href= "../pages/6th card.html"></a>
+    <div class="t6">Women's Cropped Hoodie </div> <div class="k6">1600tk</div> </button>
+  <button class="card7"><img src="../image/product 11.webp" class="p8"> <a class="p8" href= "../pages/7th card.html"></a> 
+    <div class="t7">Corduroy Hat</div> <div class="k7">500tk</div></button>
+  <button class="card8"><img src="../image/product 15.webp" class="p9"> <a class="p9" href= "../pages/8th card.html"></a> 
+    <div class="t8">Premium Polo Shirt</div> <div class="k8">800tk</div></button>
+</button>
+ 
+ 
+    
+ 
+  <div class="nev">  
+    <a href= "../demo project.html" class="h">
+      <img src="../image/home01.png" class="home">
+    </a> 
+
+    <a href= "../pages/page 2.html" class="pro">
+      <img src="../image/pngom.png" class="p">
+    </a> 
+
+    <a href= "../pages/cart page.html" class="car">
+      <img src="../image/cart5.png" class="ca">
+    </a> 
+
+
+    <a href= "../pages/about-us.html" class="about">
+      <img src="../image/about01.png" class="abo">
+    </a>
+
+    <a href= "../pages/massage.html" class="contact">
+      <img src="../image/contact.png" class="con">
+    </a> 
+
+    <div id="nev1"> 
+      <img src="../image/cancel06.png" class="cancel">   
+      <img src="../image/cancel06.png" class="cancel1"> 
+      </div>
+
+   </div>
+
+   <div class="acc">
+    <a href="../php/login_form.php"><img src="../image/acc10.png " class="ac1"></a>
+     
+  </div>
+   <div id="nev"> 
+    <img src="../image/menu03.png" class="plus">   
+    </div>    
+     
+   
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+  const accElement = document.querySelector('.acc');
+  const nevElement = document.getElementById('nev');
+  let lastScrollTop = 0;
+
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const windowHeight = window.innerHeight;
+    const documentHeight = Math.max(
+      document.body.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.clientHeight,
+      document.documentElement.scrollHeight,
+      document.documentElement.offsetHeight
+    );
+
+    if (scrollTop > lastScrollTop) {
+      // Scrolling down, move the elements to the left
+      accElement.style.left = '-100px';
+      nevElement.style.left = '-100px';
+    } else {
+      // Scrolling up
+      if (scrollTop <= 70) {
+        // Scrolled to the top, return the elements to their original positions
+        accElement.style.left = '52%';
+        nevElement.style.left = '45%';
+      }
+    }
+
+    lastScrollTop = scrollTop;
+  });
+});
+
+</script>
+        <script src="../js/main.js"></script>   
+</body>
+</html>
